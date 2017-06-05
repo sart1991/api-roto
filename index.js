@@ -6,6 +6,6 @@ import express from "express";
 const PORT = 8080;
 const app = express();
 
-app.get("/", (req, res) => res.json({status: "NTask API"}))
+app.get("/", (req, res) => res.json({status: "Lina come muchos moquitos por la mañana por la tarde y por la noche"}))
 
 app.listen(PORT, () => console.log(`NTask API - PORT ${PORT}`));
