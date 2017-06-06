@@ -1,24 +1,24 @@
 module.exports = app => {
-    const School = app.db.models.School;
-    app.route("/api-school")
+    const Task = app.db.models.Task;
+    app.route("/api-school/tasks")
         .get((req, res) => {
-            School.findAll({})
+            Task.findAll({})
             .then(result => res.json(result))
             .catch(error => {
                 res.status(412).json({msg: error.message});
             });
         })
         .post((req, res) => {
-            School.create(req.body)
+            Task.create(req.body)
                 .then(result => res.json(result))
                 .catch(error => {
                     res.status(412).json({msg: error.message});
                 });
         });
 
-    app.route("/api-school/:id([0-9])")
+    app.route("/api-school/tasks/:id")
         .get((req, res) => {
-            School.findOne({where: req.params})
+            Task.findOne({where: req.params})
                 .then(result => {
                     if(result) {
                         res.json(result);
@@ -31,14 +31,14 @@ module.exports = app => {
                 });
         })
         .put((req, res) => {
-            School.update(req.body, {where: req.params})
+            Task.update(req.body, {where: req.params})
                 .then(result => res.sendStatus(204))
                 .catch(error => {
                     res.status(412).json({msg: error.message});
                 });
         })
         .delete((req, res) => {
-            School.destroy({where: req.params})
+            Task.destroy({where: req.params})
                 .then(result => res.sendStatus(204))
                 .catch(error => {
                     res.status(412).json({msg: error.message});
