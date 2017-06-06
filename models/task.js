@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataType) => {
-    const School = sequelize.define("School", 
+    const Task = sequelize.define("Task", 
     {
         id: {
             type: DataType.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
+        description: {
             type: DataType.STRING,
             allowNull: false,
             validate: {
@@ -16,11 +16,11 @@ module.exports = (sequelize, DataType) => {
     }, {
         classMethods: {
             associate: (models) => {
-                School.hasMany(models.Professor);
-                School.hasMany(models.Student);
-                School.hasMany(models.Course);
+                Task.belongsTo(models.School);
+                Task.belongsTo(models.Course);
+                Task.belongsTo(models.Professor);
             }
         }
     });
-    return School;
+    return Task;
 };

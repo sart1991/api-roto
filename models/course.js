@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataType) => {
-    const School = sequelize.define("School", 
+    const Course = sequelize.define("Course", 
     {
         id: {
             type: DataType.INTEGER,
@@ -16,11 +16,12 @@ module.exports = (sequelize, DataType) => {
     }, {
         classMethods: {
             associate: (models) => {
-                School.hasMany(models.Professor);
-                School.hasMany(models.Student);
-                School.hasMany(models.Course);
+                Course.belongsTo(models.School);
+                Course.belongsTo(models.Professor);
+                Course.hasMany(models.Task);
+                Course.belongsToMany(models.Student, {as: "course", through: "student_course"});
             }
         }
     });
-    return School;
+    return Course;
 };

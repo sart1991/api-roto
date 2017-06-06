@@ -1,7 +1,7 @@
 module.exports = app => {
-    const School = app.models.school;
+    const School = app.db.models.School;
     app.get("/api-school", (req, res) => {
-        School.findAll({}, (school) => {
+        School.findAll({}).then(school => {
             res.json({school: school});
         });
     });
