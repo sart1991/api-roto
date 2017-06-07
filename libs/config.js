@@ -13,5 +13,7 @@ module.exports = {
             min: 0,
             idle: 10000
         }
-    }
+    },
+    jwtSecret: "s@p1r070_5ch00l",
+    jwtSession: {session: false} 
 };

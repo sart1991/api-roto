@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 module.exports = (sequelize, DataType) => {
     const Student = sequelize.define("Student", 
     {
@@ -38,6 +40,9 @@ module.exports = (sequelize, DataType) => {
                 Student.belongsToMany(models.Professor, {as: "student", through: "professor_student"});
                 Student.belongsToMany(models.Course, {as: "student", through: "student_course"});
             }
+        },
+        isPassword: (encodedPassword, password) => {
+            return bcrypt.compareSync(password, encodedPassword);
         }
     });
     return Student;
