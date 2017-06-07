@@ -3,7 +3,7 @@ import jwt from "jwt-simple";
 module.exports = app => {
     const cfg = app.libs.config;
     const Professor = app.db.models.Professor;
-    app.post("/token_professor", (req, res) => {
+    app.post("/api-school/token_professor", (req, res) => {
         if (req.body.email && req.body.password) {
             const email = req.body.email;
             const password = req.body.password;
