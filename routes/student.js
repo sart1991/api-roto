@@ -2,9 +2,9 @@ module.exports = app => {
     const Student = app.db.models.Student;
 
     app.route("/api-school/student")
-        .all(app.authStudent.authenticate())
+        .all(app.authStudent.authenticate)
         .get((req, res) => {
-            Student.findById(req.student.id, {
+            Student.findById(req.studentId, {
                 attributes: ["id", "name", "email"]
             })
             .then(result => res.json(result))
@@ -13,7 +13,7 @@ module.exports = app => {
             });
         })
         .delete((req, res) => {
-            Student.destroy({where: {id: req.student.id} })
+            Student.destroy({where: {id: req.studentId} })
                 .then(result => res.sendStatus(204))
                 .catch(error => {
                     res.status(412).json({msg: error.message});

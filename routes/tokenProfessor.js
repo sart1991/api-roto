@@ -8,17 +8,20 @@ module.exports = app => {
             const email = req.body.email;
             const password = req.body.password;
             Professor.findOne({where: {email: email}})
-                .then(professor => {
+                .then(professor => {              
                     if (Professor.isPassword(professor.password, password)) {
                         const payload = {id: professor.id};
                         res.json({
                             token: jwt.encode(payload, cfg.jwtSecret)
                         });
                     } else {
-                        res.sendStatus(401);
+                        res.status(401).json({msg: "wrong password"});
                     }
                 })
-                .catch(error => res.sendStatus(401));
+                .catch(error => {
+                    res.sendStatus(401);
+                    console.log(error.message);
+                });
             } else {
                 res.sendStatus(401);
             }

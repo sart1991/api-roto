@@ -27,7 +27,7 @@ module.exports = app => {
                 return passport.initialize();
             },
             authenticate: () => {
-                return passport.authenticate("jwtp", cfg.jwtSession);
+                return passport.authenticate("jwt", cfg.jwtSession);
             }
         };
     };

@@ -15,10 +15,10 @@ module.exports = app => {
                             token: jwt.encode(payload, cfg.jwtSecret)
                         });
                     } else {
-                        res.sendStatus(401);
+                        res.tatus(401).json({msg: "Wrong passowrd"});
                     }
                 })
-                .catch(error => res.sendStatus(401));
+                .catch(error => {res.sendStatus(401); console.log(error.message)});
             } else {
                 res.sendStatus(401);
             }

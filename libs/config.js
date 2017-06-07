@@ -15,5 +15,5 @@ module.exports = {
         }
     },
     jwtSecret: "s@p1r070_5ch00l",
-    jwtSession: {session: false} 
+    jwtSession: {session: false, failureFlash: true} 
 };

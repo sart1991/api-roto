@@ -34,15 +34,21 @@ module.exports = (sequelize, DataType) => {
             }
         }
     }, {
+        hooks: {
+            beforeCreate: user => {
+                const salt = bcrypt.genSaltSync();
+                user.password = bcrypt.hashSync(user.password, salt);
+            }
+        },
         classMethods: {
             associate: (models) => {
                 Student.belongsTo(models.School);
                 Student.belongsToMany(models.Professor, {as: "student", through: "professor_student"});
                 Student.belongsToMany(models.Course, {as: "student", through: "student_course"});
+            },
+            isPassword: (encodedPassword, password) => {
+                return bcrypt.compareSync(password, encodedPassword);
             }
-        },
-        isPassword: (encodedPassword, password) => {
-            return bcrypt.compareSync(password, encodedPassword);
         }
     });
     return Student;

@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt";
+
 module.exports = (sequelize, DataType) => {
     const Professor = sequelize.define("Professor", 
     {
@@ -27,21 +29,27 @@ module.exports = (sequelize, DataType) => {
             type: DataType.STRING,
             allowNull: false,
             validate: {
-                is: ["^[a-z\ ]+$", 'i'],
+                is: ["^[a-z]+$", 'i'],
                 notEmpty: true
             }
         }
     }, {
+        hooks: {
+            beforeCreate: user => {
+                const salt = bcrypt.genSaltSync();
+                user.password = bcrypt.hashSync(user.password, salt);
+            }
+        },
         classMethods: {
             associate: (models) => {
                 Professor.belongsTo(models.School);
                 Professor.hasMany(models.Course);
                 Professor.hasMany(models.Task);
                 Professor.belongsToMany(models.Professor, {as: "student", through: "professor_student"});
+            },
+            isPassword: (encodedPassword, password) => {
+                return bcrypt.compareSync(password, encodedPassword);
             }
-        },
-        isPassword: (encodedPassword, password) => {
-            return bcrypt.compareSync(password, encodedPassword);
         }
     });
     return Professor;
