@@ -20,7 +20,6 @@ module.exports = (sequelize, DataType) => {
                 Course.belongsTo(models.School);
                 Course.belongsTo(models.Professor);
                 Course.hasMany(models.Task);
-                Course.belongsToMany(models.Student, {as: "course", through: "student_course"});
             }
         }
     });

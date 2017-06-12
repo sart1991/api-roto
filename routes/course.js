@@ -1,14 +1,16 @@
 module.exports = app => {
     const Course = app.db.models.Course;
     app.route("/api-school/courses")
+        .all(app.authProfessor.authenticate)
         .get((req, res) => {
-            Course.findAll({})
+            Course.findAll({where: {professor_id: req.professorId}})
             .then(result => res.json(result))
             .catch(error => {
                 res.status(412).json({msg: error.message});
             });
         })
         .post((req, res) => {
+            req.body.professor_id = req.professorId;
             Course.create(req.body)
                 .then(result => res.json(result))
                 .catch(error => {

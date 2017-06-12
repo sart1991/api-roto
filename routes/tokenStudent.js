@@ -12,7 +12,7 @@ module.exports = app => {
                     if (Student.isPassword(student.password, password)) {
                         const payload = {id: student.id};
                         res.json({
-                            token: jwt.encode(payload, cfg.jwtSecret)
+                            token: jwt.encode(payload, cfg.jwtSecretStudent)
                         });
                     } else {
                         res.tatus(401).json({msg: "Wrong passowrd"});

@@ -6,8 +6,15 @@ module.exports = (sequelize, DataType) => {
             primaryKey: true,
             autoIncrement: true
         },
-        description: {
+        name: {
             type: DataType.STRING,
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
+        grade_point: {
+            type: DataType.DOUBLE,
             allowNull: false,
             validate: {
                 notEmpty: true
@@ -19,6 +26,7 @@ module.exports = (sequelize, DataType) => {
                 Task.belongsTo(models.School);
                 Task.belongsTo(models.Course);
                 Task.belongsTo(models.Professor);
+                Task.belongsTo(models.Student);
             }
         }
     });

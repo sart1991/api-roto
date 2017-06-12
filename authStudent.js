@@ -7,7 +7,7 @@ module.exports = app => {
         authenticate: (req, res, next) => {
             let studentId = 0;
             try {
-                req.studentId = (jwt.decode(req.headers.authorization, cfg.jwtSecret).id);
+                req.studentId = (jwt.decode(req.headers.authorization, cfg.jwtSecretStudent).id);
                 next();
             } catch(err) {
                 res.sendStatus(401);

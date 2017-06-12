@@ -45,7 +45,6 @@ module.exports = (sequelize, DataType) => {
                 Professor.belongsTo(models.School);
                 Professor.hasMany(models.Course);
                 Professor.hasMany(models.Task);
-                Professor.belongsToMany(models.Professor, {as: "student", through: "professor_student"});
             },
             isPassword: (encodedPassword, password) => {
                 return bcrypt.compareSync(password, encodedPassword);

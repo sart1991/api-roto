@@ -12,7 +12,7 @@ module.exports = app => {
                     if (Professor.isPassword(professor.password, password)) {
                         const payload = {id: professor.id};
                         res.json({
-                            token: jwt.encode(payload, cfg.jwtSecret)
+                            token: jwt.encode(payload, cfg.jwtSecretProfessor)
                         });
                     } else {
                         res.status(401).json({msg: "wrong password"});

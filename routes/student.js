@@ -20,6 +20,17 @@ module.exports = app => {
                 });
         });
 
+    app.route("/api-school/students")
+        .all(app.authProfessor.authenticate)
+        .get((req, res) => {
+            Student.findAll({
+                attributes: ["id", "name", "email"]
+            })
+            .then(result => res.json(result))
+            .catch(error => {
+                res.status(412).json({msg: error.message})
+            });
+        });
     app.post("/api-school/students", (req, res) => {
         Student.create(req.body)
             .then(result => res.json(result))

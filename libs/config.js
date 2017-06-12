@@ -14,6 +14,7 @@ module.exports = {
             idle: 10000
         }
     },
-    jwtSecret: "s@p1r070_5ch00l",
+    jwtSecretProfessor: "s@p1r070_5ch00l_pR0f355Or",
+    jwtSecretStudent: "s@p1r070_5ch00l_57ud3n7",
     jwtSession: {session: false, failureFlash: true} 
 };
